@@ -5,7 +5,10 @@ import { Navbar, NavbarBrand } from 'reactstrap';
 const Header = props => (
     <Navbar>
         <NavbarBrand href='#'>Tiny Improvement</NavbarBrand>
-        <NavModal buttonLabel='Give Kudos' />
+        <NavModal buttonLabel='Give Kudos' 
+            handleClick={props.handleClick} 
+            usersList={props.usersList}
+        />
     </Navbar>
 );
 

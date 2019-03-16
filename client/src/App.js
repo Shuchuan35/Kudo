@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import * as $ from 'axios';
+import * as $ from 'axios';
 // import Kudo from './components/Kudo';
 import Header from './components/Header';
 // import NavModal from './components/NavModal';
@@ -7,13 +7,16 @@ import { Container, Row, Col, Button } from 'reactstrap';
 
 
 class App extends Component {
-
   state = {
-    show: false
+    usersList: []
   }
 
-  handleShow = () => {
-    this.setState({ show: true });
+  handleClick = () => {
+    $.get('/api/users')
+    .then((res) => {
+      console.log(res);
+      this.setState({ usersList: res.data });
+    })
   }
 
   handleClose = () => {
@@ -24,7 +27,10 @@ class App extends Component {
     return (
       <div className="App">
         <Container>
-          <Header />
+          <Header 
+            handleClick={this.handleClick}
+            usersList={this.usersList}
+          />
           <Row>
             <Col></Col>
             <Col xs='8'>
@@ -33,10 +39,7 @@ class App extends Component {
                 <Button color='danger'>Click</Button>
               </p>
             </Col>
-            <Col>
-            
-
-            </Col>
+            <Col></Col>
           </Row>
         </Container>
       </div>
