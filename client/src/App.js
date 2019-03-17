@@ -1,26 +1,63 @@
 import React, { Component } from 'react';
 import * as $ from 'axios';
-// import Kudo from './components/Kudo';
+import Kudo from './components/Kudo';
 import Header from './components/Header';
-// import NavModal from './components/NavModal';
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 
 class App extends Component {
   state = {
-    usersList: []
+    usersList: [],
+    kudosList: [],
+    title: '',
+    body: '',
+    sender: '',
+    receiver: ''
+  }
+
+  getAllUsers = () => {
+    $.get('/api/users')
+    .then((res) => {
+      // console.log(res.data);
+      this.setState({ usersList: res.data });
+    });
+  }
+  
+  getAllkudos = () => {
+    $.get('/api/kudos')
+    .then((res) => {
+      this.setState({ kudosList: res.data });
+    });
+    console.log(this.state.kudosList);
+  }
+
+  componentDidMount = () => {
+    this.getAllkudos();
+    this.getAllUsers();
+  }
+
+  handleChange = e => {
+    e.preventDefault();
+    this.setState({
+      [e.target.name] : e.target.value
+    });
+    console.log(this.state.title, this.state.body, this.state.sender, this.state.receiver);
   }
 
   handleClick = () => {
-    $.get('/api/users')
-    .then((res) => {
-      console.log(res);
-      this.setState({ usersList: res.data });
-    })
-  }
-
-  handleClose = () => {
-    this.setState({ show: false });
+    const newKudo = {
+      title: this.state.title,
+      body: this.state.body,
+      fromUser: this.state.sender,
+      toUser: this.state.receiver
+    }
+    $.post('/api/kudo', newKudo)
+    .then( (data) => {
+      console.log(data);
+      // this.setState({
+      //   kudosList: [...this.state.kudosList, data]
+      // });
+    });
   }
 
   render() {
@@ -28,16 +65,14 @@ class App extends Component {
       <div className="App">
         <Container>
           <Header 
+            usersList={this.state.usersList}
+            handleChange={this.handleChange}
             handleClick={this.handleClick}
-            usersList={this.usersList}
           />
           <Row>
             <Col></Col>
             <Col xs='8'>
-              <h1>New Kudo site</h1>
-              <p>
-                <Button color='danger'>Click</Button>
-              </p>
+              <Kudo kudosList={this.state.kudosList}/>
             </Col>
             <Col></Col>
           </Row>

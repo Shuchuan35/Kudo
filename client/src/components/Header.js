@@ -6,6 +6,7 @@ const Header = props => (
     <Navbar>
         <NavbarBrand href='#'>Tiny Improvement</NavbarBrand>
         <NavModal buttonLabel='Give Kudos' 
+            handleChange={props.handleChange}
             handleClick={props.handleClick} 
             usersList={props.usersList}
         />
