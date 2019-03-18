@@ -29,7 +29,9 @@ class NavModal extends React.Component {
   render() {
     return (
       <div>
-        <Button color="outline-info" onClick={this.toggle}>{this.props.buttonLabel}</Button>
+        <Button color="outline-info" onClick={this.toggle}>
+          <i className="fa fa-thumbs-o-up" aria-hidden="true"></i> {this.props.buttonLabel}
+        </Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Give a kudo!</ModalHeader>
           <ModalBody>

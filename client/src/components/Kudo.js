@@ -6,12 +6,12 @@ import {
 
 const Kudo = (props) => (
    <div>{props.kudosList.map(kudo => (
-      <Card key={kudo._id}>
+      <Card key={kudo._id} className='kudo'>
          <CardBody>
-            <CardTitle>{kudo.title}</CardTitle>
-            <CardSubtitle>{kudo.fromuser}</CardSubtitle>
+            <CardTitle className='text-capitalize text-info'><h5>{kudo.title}</h5></CardTitle>
+            <CardSubtitle>{kudo.username}</CardSubtitle>
             <CardText>{kudo.body}</CardText>
-            <CardSubtitle>~Sommebody</CardSubtitle>
+            <CardSubtitle className='text-muted font-italic'>~{kudo.fromuser} <i className="fa fa-smile-o" aria-hidden="true"></i></CardSubtitle>
          </CardBody>
       </Card>
    ))}

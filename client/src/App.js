@@ -3,6 +3,7 @@ import * as $ from 'axios';
 import Kudo from './components/Kudo';
 import Header from './components/Header';
 import { Container, Row, Col } from 'reactstrap';
+import './App.css';
 
 
 class App extends Component {
@@ -25,9 +26,7 @@ class App extends Component {
         clone.username = username;
         kudoArray.push(clone);
       }
-      console.log(kudos);
     }
-    console.log(kudoArray);
     const sortById = (a, b) => {
         let x = a._id.toLowerCase();
         let y = b._id.toLowerCase();
@@ -84,7 +83,7 @@ class App extends Component {
           />
           <Row>
             <Col></Col>
-            <Col xs='8'>
+            <Col xs='9'>
               <Kudo kudosList={this.state.kudosList} />
             </Col>
             <Col></Col>
