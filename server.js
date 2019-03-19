@@ -3,10 +3,8 @@ const mongoose = require("mongoose");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const MONGODB_URI = require('./config/keys');
 
-mongoose.connect('mongodb://localhost/kudoApp', { useNewUrlParser: true });
-
-// Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -15,8 +13,17 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Add routes, both API and view
+//connect to production mongodb
+mongoose.connect(MONGODB_URI || 'mongodb://localhost/kudoApp', {useNewUrlParser: true });
+// mongoose.connect('mongodb://localhost/kudoApp', { useNewUrlParser: true });
+
 require('./routes/api-routes')(app);
+
+if (process.env.NODE_ENV === "production") {
+  app.get('*', function (req, res) {
+    res.sendFile(__dirname + '/client/build/index.html');
+  });
+}
 
 // Start the API server
 app.listen(PORT, function() {
