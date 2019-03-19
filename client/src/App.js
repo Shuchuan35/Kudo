@@ -35,14 +35,12 @@ class App extends Component {
         return 0;
     }
     this.setState({ kudosList: kudoArray.sort(sortById) });
-    console.log(this.state.kudosList);
   }
 
   getAllUsers = () => {
     $.get('/api/users')
       .then((res) => {
         this.setState({ usersList: res.data });
-        console.log(res.data);
         this.getAllkudos(res.data);
       });
   }
@@ -53,12 +51,12 @@ class App extends Component {
 
   handleChange = e => {
     e.preventDefault();
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    const {name, value} = e.target;
+		this.setState({ [name]: value });
   }
 
   handleClick = () => {
+    // const {title, body, fromUser, toUser} = this.state;
     const newKudo = {
       title: this.state.title,
       body: this.state.body,
@@ -67,7 +65,6 @@ class App extends Component {
     }
     $.post('/api/kudo', newKudo)
       .then((data) => {
-        console.log(data);
         this.getAllUsers();
       });
   }
