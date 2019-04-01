@@ -14,8 +14,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //connect to production mongodb
-// mongoose.connect(MONGODB_URI || 'mongodb://localhost/kudoApp', {useNewUrlParser: true });
-mongoose.connect('mongodb://localhost/kudoApp', { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI || 'mongodb://localhost/kudoApp', {useNewUrlParser: true });
+// mongoose.connect('mongodb://localhost/kudoApp', { useNewUrlParser: true });
 
 require('./routes/api-routes')(app);
 
