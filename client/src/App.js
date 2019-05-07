@@ -78,7 +78,7 @@ class App extends Component {
             handleChange={this.handleChange}
             handleClick={this.handleClick}
           />
-          <Row>
+          <Row style={{overflowY: 'scroll', height: '650px'}} >
             <Col></Col>
             <Col xs='9'>
               <Kudo kudosList={this.state.kudosList} />
