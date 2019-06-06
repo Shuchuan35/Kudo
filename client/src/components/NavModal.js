@@ -35,7 +35,7 @@ class NavModal extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Give a kudo!</ModalHeader>
           <ModalBody>
-            <Form inline>
+            <Form>
               <FormGroup row>
                 <Col>
                   <Input type="select" name="sender" id="sender" onChange={this.props.handleChange}>
